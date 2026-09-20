@@ -1,62 +1,153 @@
-# Expenso — Personal Expense Tracker
+<div align="center">
 
-A modern, high-performance personal finance and expense management application designed for speed, privacy, and actionable insights.
+# 💎 Expenso
 
-![Expenso Dashboard](https://raw.githubusercontent.com/fareedfk/Expenso/main/apps/web/public/img/logo.svg)
+### *The High-Speed, Private Personal Finance Tracker*
 
-## ✨ Highlights
+[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com)
+[![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://mysql.com)
+[![Turborepo](https://img.shields.io/badge/Turborepo-EF4444?style=for-the-badge&logo=turborepo&logoColor=white)](https://turbo.build)
+[![License](https://img.shields.io/badge/License-MIT-10B981?style=for-the-badge)](LICENSE)
 
-- **Quick Record Entry (<5s)**: Streamlined landing page with an encircled action hub and top frequently used category chips.
-- **Complete Privacy & Isolation**: Each user gets a completely isolated workspace with seeded default categories.
-- **Interactive Analytics**: Monthly breakdown, category donut charts, daily spending trends, and budget progress bars.
-- **Smart Budgets & Recurring Bills**: Track category limits with visual indicators and manage active subscriptions.
-- **Fast Search & Filter**: Filter transactions by type, category, date range, amount, and text query.
-- **Monorepo Turborepo Architecture**: Clean separation between FastAPI backend (`apps/api`), modular frontend (`apps/web`), and shared packages.
+<p align="center">
+  <b>Built for lightning-fast expense logging (< 5s), zero data leakage, and deep financial clarity.</b>
+</p>
+
+[Explore Features](#-features) •
+[Quick Start](#-quick-start) •
+[Keyboard Shortcuts](#-keyboard-shortcuts) •
+[Architecture](#-architecture) •
+[API Reference](#-api-documentation)
 
 ---
 
-## 🛠️ Tech Stack
+</div>
 
-- **Backend**: Python 3.10+, FastAPI, SQLAlchemy, PyMySQL / SQLite fallback, Pydantic, JWT Authentication (bcrypt).
-- **Frontend**: Vanilla HTML5, Semantic CSS3, Vanilla JavaScript ES6+, Chart.js.
-- **Monorepo**: Turborepo, NPM workspaces.
+## 🌟 Why Expenso?
+
+Most finance apps force you through 5–6 screens just to record a coffee. **Expenso** is built on the core principle:
+
+> **Minimum Clicks → Maximum Information**
+
+- ⚡ **Zero-Latency Landing Hub**: Centered hero action trigger (`+`) with instant Expense vs Income branching.
+- 🎯 **One-Click Frequent Categories**: Pre-calculated top 4 monthly categories with live spend badges (`🍔 Food`, `🛒 Shopping`, `🚕 Transport`, `💡 Bills`).
+- 🔒 **Zero Data Leakage**: User-isolated databases, bcrypt-hashed credentials, stateless JWT tokens, and automated category seeding per user.
+- 📊 **Real-Time Visual Intelligence**: Dynamic doughnut breakdowns, daily burn rates, and monthly budget progress monitors.
+- 🔄 **Recurring Subscriptions & Budgets**: Set category caps and monitor active memberships without surprise renewals.
+- ⚡ **Supercharged Keyboard Navigation**: Command bar (`Ctrl+K`), instant expense modal (`E`), instant income modal (`I`), and global search (`/`).
+
+---
+
+## 🎨 Feature Showcase
+
+| 🏠 Quick Landing View | 📊 Financial Analytics | 💳 Ledger & Search |
+| :---: | :---: | :---: |
+| Centered Encircled Hero `+` & 4 Frequent Categories | Category Donut & Daily Trend Lines | Multi-filter Transactions & Pagination |
+
+| 🏷️ Category Management | 🎯 Monthly Budgets | 🔄 Recurring Subscriptions |
+| :---: | :---: | :---: |
+| Custom Colors & Emoji/Lucide Icons | Visual Progress & Warning Thresholds | Auto-Renewal Dates & Billing Cycles |
+
+---
+
+## ⌨️ Power-User Keyboard Shortcuts
+
+Expenso is designed to be operated completely keyboard-first:
+
+| Shortcut | Action | Description |
+| :---: | :--- | :--- |
+| <kbd>Ctrl</kbd> + <kbd>K</kbd> | **Command Bar** | Quick access to any action, view, or modal |
+| <kbd>E</kbd> | **Add Expense** | Opens expense logger with amount auto-focused |
+| <kbd>I</kbd> | **Add Income** | Opens income logger immediately |
+| <kbd>/</kbd> | **Search Ledger** | Jumps to transaction ledger and focuses filter |
+| <kbd>Esc</kbd> | **Close / Dismiss** | Closes any open modal overlay instantly |
+
+---
+
+## 🏛️ Architecture & Clean Code
+
+Expenso adheres to strict domain-driven standards and clean monorepo architecture:
+
+```
+expenso/
+├── apps/
+│   ├── api/                     # High-performance FastAPI backend service
+│   │   ├── core/                # Database engines, config, JWT security
+│   │   └── domain/              # Domain-isolated modules (Models, Schemas, Routers)
+│   │       ├── auth/            # Registration, login, profile, password change
+│   │       ├── transactions/    # CRUD, pagination, filtering, summaries
+│   │       ├── categories/      # Custom categories & icons
+│   │       ├── budgets/         # Monthly thresholds & progress calculation
+│   │       ├── analytics/       # Cashflow, category breakdown, trend charts
+│   │       └── recurring/       # Active subscriptions & recurring reminders
+│   └── web/                     # Modular frontend client (Zero framework bloat)
+│       └── public/
+│           ├── css/             # Semantic CSS layers (tokens, base, components, home)
+│           └── js/              # Modular JS views, charts, and state store
+├── packages/config/             # Shared build configurations & ESLint rules
+├── AGENTS.md                    # Operational standards (< 500 LOC per file)
+└── turbo.json                   # Monorepo pipeline orchestrator
+```
+
+> [!NOTE]
+> **Strict Line Limit Standard**: Every single file across the entire codebase strictly stays under **500 lines of code** for maximum maintainability.
 
 ---
 
 ## 🚀 Quick Start
 
-### 1. Prerequisites
-- Python 3.10+
-- MySQL (via XAMPP, Docker, or native service) or automatic SQLite fallback.
-- Node.js & npm (optional, for Turbo pipeline)
-
-### 2. Backend Setup
+### 1. Clone & Setup
 ```bash
-# Install dependencies
-pip install -r requirements.txt
-
-# Configure environment
-cp .env.example .env
-# Edit .env with your MySQL credentials (if MySQL is running, otherwise SQLite is used automatically)
-
-# Optional: Seed sample demo data
-python seed.py
-
-# Start application server
-python run.py
+git clone https://github.com/fareedfk/Expenso.git
+cd Expenso
 ```
 
-The application will be live at `http://127.0.0.1:8000`.
+### 2. Environment Configuration
+```bash
+cp .env.example .env
+```
+*(Default settings automatically fall back to SQLite if MySQL is not detected)*
+
+### 3. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Optional: Seed Demo Workspace
+```bash
+python seed.py
+```
+
+### 5. Launch the Application
+```bash
+python run.py
+```
+App will be running at **`http://127.0.0.1:8000`**.
 
 ---
 
-## 🏛️ Architecture & Clean Code Rules
+## 📡 API Documentation
 
-- **Strict File Limit**: Every file is strictly under 500 lines of code (<500 LOC).
-- **Domain-Driven Isolation**: Feature routers, models, and schemas are isolated under `apps/api/domain/<feature>`.
-- **Frontend Modularity**: Separated CSS layers (`tokens.css`, `base.css`, `components.css`, `home.css`) and modular JS views (`services/`, `components/`, `views/`).
+Interactive Swagger documentation is auto-generated by FastAPI:
+
+- **Swagger UI**: [`http://127.0.0.1:8000/docs`](http://127.0.0.1:8000/docs)
+- **ReDoc**: [`http://127.0.0.1:8000/redoc`](http://127.0.0.1:8000/redoc)
 
 ---
 
-## 📄 License
-MIT License
+## 🛡️ Security & Privacy
+
+- **Stateless Authentication**: Pure JWT bearer tokens with standard header verification.
+- **Passlib & Bcrypt**: Industry-standard cryptographic salt and hashing for passwords.
+- **Strict User Isolation**: All transactional data, categories, budgets, and analytics queries are explicitly bound to the authenticated `user_id`.
+
+---
+
+<div align="center">
+
+Crafted with care for speed, simplicity, and financial wellness.
+
+⭐ **Star this repository if you find it helpful!**
+
+</div>
