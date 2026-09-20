@@ -24,12 +24,13 @@ const State = (() => {
   function getCurrencySymbol() { return CURRENCY_SYMBOLS[state.currency] || "₹"; }
 
   function formatCurrency(amount) {
-    if (amount === undefined || amount === null) return `${getCurrencySymbol()}0`;
+    if (amount === undefined || amount === null || isNaN(amount)) return `${getCurrencySymbol()}0`;
+    const isNegative = amount < 0;
     const formatted = Math.abs(amount).toLocaleString("en-IN", {
       minimumFractionDigits: 0,
       maximumFractionDigits: 2
     });
-    return `${getCurrencySymbol()}${formatted}`;
+    return `${isNegative ? "-" : ""}${getCurrencySymbol()}${formatted}`;
   }
 
   function formatDate(dateStr) {

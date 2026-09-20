@@ -39,16 +39,30 @@ def get_summary(user_id: int = Depends(get_current_user_id), db: Session = Depen
         Transaction.user_id == user_id, Transaction.type == "expense", Transaction.transaction_date == today
     ).scalar() or 0.0
 
-    m_sav = m_inc - m_exp
-    rate = round((m_sav / m_inc * 100), 1) if m_inc > 0 else 0.0
+    # Total balance rule: balance only increases when income is added; if 0 income, balance stays 0
+    total_bal = round(total_inc - total_exp, 2) if total_inc > 0 else 0.0
+
+    # Monthly savings: only positive savings if income exists
+    if m_inc > 0:
+        m_sav = round(max(0.0, m_inc - m_exp), 2)
+        rate = round((m_sav / m_inc * 100), 1)
+    else:
+        m_sav = 0.0
+        rate = 0.0
+
     cnt = db.query(Transaction).filter(Transaction.user_id == user_id).count()
 
     return AnalyticsSummary(
-        total_balance=round(total_inc - total_exp, 2), total_income=round(total_inc, 2),
-        total_expense=round(total_exp, 2), total_savings=round(max(0.0, total_inc - total_exp), 2),
-        monthly_income=round(m_inc, 2), monthly_expense=round(m_exp, 2),
-        monthly_savings=round(m_sav, 2), today_expense=round(t_exp, 2),
-        savings_rate=rate, transaction_count=cnt
+        total_balance=total_bal,
+        total_income=round(total_inc, 2),
+        total_expense=round(total_exp, 2),
+        total_savings=round(max(0.0, total_inc - total_exp) if total_inc > 0 else 0.0, 2),
+        monthly_income=round(m_inc, 2),
+        monthly_expense=round(m_exp, 2),
+        monthly_savings=m_sav,
+        today_expense=round(t_exp, 2),
+        savings_rate=rate,
+        transaction_count=cnt
     )
 
 @router.get("/monthly", response_model=List[MonthlyTrendItem])
