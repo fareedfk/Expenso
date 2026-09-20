@@ -1,0 +1,12 @@
+# Re-export from apps.api.core.config
+from apps.api.core.config import (
+    DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD,
+    MYSQL_URL, MYSQL_ROOT_URL, SQLITE_URL,
+    JWT_SECRET, JWT_ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
+)
+
+__all__ = [
+    "DB_HOST", "DB_PORT", "DB_NAME", "DB_USER", "DB_PASSWORD",
+    "MYSQL_URL", "MYSQL_ROOT_URL", "SQLITE_URL",
+    "JWT_SECRET", "JWT_ALGORITHM", "ACCESS_TOKEN_EXPIRE_MINUTES"
+]

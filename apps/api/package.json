@@ -1,0 +1,10 @@
+{
+  "name": "@expenso/api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Expenso FastAPI Enterprise Backend",
+  "scripts": {
+    "dev": "python -m uvicorn apps.api.main:app --host 127.0.0.1 --port 8000 --reload",
+    "start": "python -m uvicorn apps.api.main:app --host 127.0.0.1 --port 8000"
+  }
+}

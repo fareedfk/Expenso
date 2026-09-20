@@ -1,0 +1,10 @@
+{
+  "name": "@expenso/web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Expenso Modern Vanilla Web Client",
+  "scripts": {
+    "dev": "python -m http.server 3000 --directory public",
+    "start": "python -m http.server 3000 --directory public"
+  }
+}
