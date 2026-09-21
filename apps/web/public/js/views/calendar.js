@@ -33,12 +33,18 @@ const CalendarView = (() => {
       const empty = document.createElement("div"); empty.className = "calendar-cell empty"; grid.appendChild(empty);
     }
 
+    const todayStr = State.getTodayDateString();
+
     for (let day = 1; day <= daysInMonth; day++) {
       const dStr = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
       const dayData = data[dStr];
       const cell = document.createElement("div");
-      cell.className = "calendar-cell";
-      cell.onclick = () => showDetail(dStr, dayData);
+      cell.className = "calendar-cell" + (dStr === todayStr ? " today" : "");
+      cell.onclick = () => {
+        grid.querySelectorAll(".calendar-cell").forEach(c => c.classList.remove("selected"));
+        cell.classList.add("selected");
+        showDetail(dStr, dayData);
+      };
       cell.innerHTML = `
         <span class="cell-date">${day}</span>
         ${dayData && dayData.total_expense > 0 ? `<span class="cell-spent">${State.formatCurrency(dayData.total_expense)}</span>` : ''}

@@ -7,7 +7,7 @@ from apps.api.domain.payment_methods.schemas import PaymentMethodResponse
 class TransactionBase(BaseModel):
     amount: float = Field(..., gt=0)
     type: str = Field(..., pattern="^(expense|income)$")
-    description: str = Field(..., min_length=1, max_length=255)
+    description: Optional[str] = Field(None, max_length=255)
     category_id: Optional[int] = None
     payment_method_id: Optional[int] = None
     transaction_date: date = Field(default_factory=date.today)

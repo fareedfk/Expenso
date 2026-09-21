@@ -26,7 +26,7 @@ def list_transactions(
     max_amount: Optional[float] = Query(None, ge=0),
     search: Optional[str] = Query(None),
     page: int = Query(1, ge=1),
-    limit: int = Query(50, ge=1, le=500),
+    limit: int = Query(50, ge=1, le=1000),
     user_id: int = Depends(get_current_user_id),
     db: Session = Depends(get_db)
 ):
@@ -68,11 +68,19 @@ def create_transaction(
     ).first():
         raise HTTPException(status_code=400, detail="Invalid payment method.")
 
+    desc = data.description.strip() if data.description and data.description.strip() else None
+    if not desc:
+        if data.category_id:
+            cat = db.query(Category).filter(Category.id == data.category_id).first()
+            desc = cat.name if cat else ("Income" if data.type == "income" else "Expense")
+        else:
+            desc = "Income" if data.type == "income" else "Expense"
+
     tx = Transaction(
         user_id=user_id,
         amount=data.amount,
         type=data.type,
-        description=data.description.strip(),
+        description=desc,
         category_id=data.category_id,
         payment_method_id=data.payment_method_id,
         transaction_date=data.transaction_date,

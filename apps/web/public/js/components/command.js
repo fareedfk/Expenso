@@ -35,7 +35,13 @@ const Command = (() => {
         if (found) { matchedCatId = found.id; break; }
       }
     }
-    return { amount, description: desc, type, category_id: matchedCatId };
+    return {
+      amount,
+      description: desc,
+      type,
+      category_id: matchedCatId,
+      transaction_date: State.getTodayDateString()
+    };
   }
 
   return { parse };

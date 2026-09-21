@@ -46,11 +46,12 @@ const HomeView = (() => {
       "Others": "📦"
     };
 
-    // Sort by spending this month or pick top 4 prominent categories
+    // Sort by spending this month: show only categories with expenses (or fallback to top 4 if empty)
     const sorted = [...categories].sort((a, b) => (spendMap[b.id] || 0) - (spendMap[a.id] || 0));
-    const top4 = sorted.slice(0, 4);
+    const usedOnly = sorted.filter(c => (spendMap[c.id] || 0) > 0);
+    const displayCats = usedOnly.length > 0 ? usedOnly : sorted.slice(0, 4);
 
-    container.innerHTML = top4.map(c => {
+    container.innerHTML = displayCats.map(c => {
       const amt = spendMap[c.id] || 0;
       const icon = categoryIcons[c.name] || "🏷️";
       return `
@@ -63,7 +64,7 @@ const HomeView = (() => {
     }).join("");
   }
 
-  // Encircled Big Plus Button Action
+  // Encircled Big Plus Button Action: choose between Expense or Income
   function onHeroPlusClick() {
     Modals.open("homeChoiceModal");
   }

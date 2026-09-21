@@ -51,6 +51,13 @@ const API = (() => {
       const user = await request("/api/auth/me");
       setCurrentUser(user); return user;
     },
+    updateProfile: async (data) => {
+      const user = await request("/api/auth/profile", { method: "PUT", body: JSON.stringify(data) });
+      setCurrentUser(user); return user;
+    },
+    changePassword: async (current_password, new_password) => {
+      return await request("/api/auth/change-password", { method: "POST", body: JSON.stringify({ current_password, new_password }) });
+    },
     getTransactions: async (params = {}) => {
       const q = new URLSearchParams();
       Object.entries(params).forEach(([k, v]) => { if (v !== undefined && v !== null && v !== "") q.append(k, v); });

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expenso — College Project Presentation (AIETM)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/college_deck.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="deck-topbar">
+    <div class="brand">
+      <img src="/static/aietm_logo.png" alt="AIETM Crest">
+      <span>AIETM Jaipur</span>
+      <span class="brand-badge">CAPSTONE • 2025–26</span>
+    </div>
+    <div class="slide-counter" id="slideIndicator">Slide 1 of 16</div>
+    <div class="deck-actions">
+      <button class="btn" onclick="CollegeDeck.prevSlide()">◀ Previous</button>
+      <button class="btn" onclick="CollegeDeck.nextSlide()">Next ▶</button>
+      <button class="btn" onclick="CollegeDeck.toggleFullScreen()">⛶ Fullscreen</button>
+      <button class="btn btn-gold" onclick="window.print()">🖨️ Save as PDF</button>
+      <a href="/static/Expenso_Fareed_Khilji.pptx" download class="btn btn-gold">📥 Download .PPTX</a>
+      <a href="/" class="btn">🚀 Open App</a>
+    </div>
+  </header>
+
+  <!-- Stage Container -->
+  <main class="stage-container">
+    <div class="slide-canvas" id="slideCanvas">
+      <!-- Slides dynamically rendered from college_slides_data.js -->
+    </div>
+  </main>
+
+  <script src="/static/js/college_slides_data.js"></script>
+  <script src="/static/js/college_deck.js"></script>
+</body>
+</html>

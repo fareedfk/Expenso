@@ -67,6 +67,9 @@ const TransactionsView = (() => {
       Modals.openAddTxModal(data.type);
       document.getElementById("txCategory").value = data.category_id || "";
       document.getElementById("txPaymentMethod").value = data.payment_method_id || "";
+      document.querySelectorAll(".tx-quick-chip").forEach(ch => {
+        ch.classList.toggle("active", ch.dataset.catId == data.category_id);
+      });
     } catch {
       Toast.show("Could not load transaction", "error");
     }

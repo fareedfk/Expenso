@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expenso — Project Presentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/presentation.css">
+</head>
+<body>
+
+  <!-- Ambient Rolling Rupee Background -->
+  <div class="bg-rupees-container" aria-hidden="true">
+    <div class="bg-rupee r1">₹</div>
+    <div class="bg-rupee r2">₹</div>
+    <div class="bg-rupee r3">₹</div>
+    <div class="bg-rupee r4">₹</div>
+    <div class="bg-rupee r5">₹</div>
+    <div class="bg-rupee r6">₹</div>
+  </div>
+
+  <!-- Top Bar -->
+  <header class="deck-topbar">
+    <div class="brand">
+      <div class="rupee-coin-3d" title="Expenso Rupee Coin">₹</div>
+      <span>Expenso</span>
+      <span class="brand-badge">₹ RUPEE EDITION • CAPSTONE</span>
+    </div>
+    <div class="slide-indicator" id="slideIndicator">Slide 1 of 16</div>
+    <div class="deck-actions">
+      <button class="nav-btn" id="prevBtn" onclick="PresentationDeck.prevSlide()">◀ Previous</button>
+      <button class="nav-btn" id="nextBtn" onclick="PresentationDeck.nextSlide()">Next ▶</button>
+      <button class="nav-btn" onclick="PresentationDeck.toggleFullScreen()" title="Full Screen">⛶ Fullscreen</button>
+      <a href="/static/Expenso_College_Presentation.pptx" download class="nav-btn" style="text-decoration:none; background: var(--accent-gold); color: #451A03; font-weight: 700; border-color: var(--accent-gold);">📥 Download .pptx</a>
+      <a href="/" class="nav-btn" style="text-decoration:none;">🚀 Open App</a>
+    </div>
+  </header>
+
+  <!-- Slide Canvas -->
+  <main class="slides-wrapper">
+
+    <!-- SLIDE 1: TITLE -->
+    <section class="slide active">
+      <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 8px;">
+        <div class="rupee-coin-3d rupee-coin-lg">₹</div>
+        <div>
+          <div class="slide-tag" style="margin-bottom: 2px;">Final Year Project Presentation</div>
+          <span style="font-size: 0.8rem; color: var(--accent-gold); font-weight: 700; letter-spacing: 1px;">FINTECH & CASHFLOW TRACKING SYSTEM</span>
+        </div>
+      </div>
+      <h1 class="slide-title" style="font-size: 2.7rem; margin-bottom: 10px;">Expenso — Personal Finance & Expense Tracker</h1>
+      <p style="color: var(--accent-gold); font-size: 1.12rem; font-weight: 600; margin-bottom: 26px;">
+        High-Performance, Privacy-First Personal Finance Web Application
+      </p>
+      <div class="grid-2" style="margin-top: 12px;">
+        <div class="info-card" style="border-left: 4px solid var(--accent-gold);">
+          <h4 style="color: var(--accent-gold);">🎯 Project Core Concept</h4>
+          <p style="margin-bottom: 12px;">
+            A modern, full-stack financial dashboard engineered to log transactions in <strong>under 5 seconds</strong> with zero data leakage, intelligent category keyword auto-detection, and real-time visual cashflow analytics.
+          </p>
+          <div>
+            <span class="pill pill-green">FastAPI (Python)</span>
+            <span class="pill pill-blue">Modular Vanilla JS</span>
+            <span class="pill pill-purple">Clean Architecture</span>
+            <span class="pill pill-orange">SQLite / SQLAlchemy</span>
+          </div>
+        </div>
+        <div class="info-card" style="border-left: 4px solid var(--accent-blue);">
+          <h4 style="color: var(--accent-blue);">👤 Presenter Details</h4>
+          <p style="margin-bottom: 8px;"><strong>Course:</strong> B.Tech / B.E. / BCA / MCA Computer Science</p>
+          <p style="margin-bottom: 8px;"><strong>Project Type:</strong> Full Stack Web Engineering</p>
+          <p style="margin-bottom: 8px;"><strong>Database:</strong> Relational (RDBMS with Foreign Key Cascades)</p>
+          <p><strong>Status:</strong> Fully Functional & Locally Hosted (<a href="/" style="color: var(--accent-gold); text-decoration: none;">http://localhost:8000</a>)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 2: PROBLEM STATEMENT -->
+    <section class="slide">
+      <div class="slide-tag">Context & Motivation</div>
+      <h2 class="slide-title">Problem Statement & Existing Gaps</h2>
+      <div class="grid-3">
+        <div class="info-card">
+          <h4>❌ Tedious Logging</h4>
+          <p>Existing mobile & web apps require 5-6 clicks, multiple dropdowns, and slow transitions just to record a single cup of tea or coffee.</p>
+        </div>
+        <div class="info-card">
+          <h4>❌ Privacy & Ad Trackers</h4>
+          <p>Commercial finance apps frequently read SMS inboxes, upload sensitive financial data to 3rd-party ad networks, and lack transparency.</p>
+        </div>
+        <div class="info-card">
+          <h4>❌ Bloated Frameworks</h4>
+          <p>Heavy client-side bundles (10MB+ React/Angular SPAs) cause sluggish load times, high memory usage, and poor responsiveness on low-end devices.</p>
+        </div>
+      </div>
+      <div class="info-card" style="margin-top: 24px; border-left: 4px solid var(--accent);">
+        <h4>💡 Our Core Engineering Principle</h4>
+        <p style="font-size: 1rem; color: #FFF; font-weight: 600;">"Minimum Clicks → Maximum Information with Zero-Latency Logging"</p>
+        <p style="margin-top: 6px;">Expenso removes all friction: centered hero action button, automatic category prediction from keywords, and keyboard-first navigation.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 3: KEY HIGHLIGHTS -->
+    <section class="slide">
+      <div class="slide-tag">Solution Overview</div>
+      <h2 class="slide-title">Proposed Solution & Core USPs</h2>
+      <div class="grid-2">
+        <div class="info-card">
+          <h4>⚡ Smart Category Auto-Detection</h4>
+          <p>User simply types <em>"Pizza 250"</em> or <em>"Uber cab"</em> in the description — the app automatically identifies keywords and selects the category instantly without manual dropdown searching.</p>
+        </div>
+        <div class="info-card">
+          <h4>🔒 Isolated Income & Expense Engine</h4>
+          <p>Dedicated logic guarantees that logging expenses never pollutes subsequent income entries (clean state reset, optional description, default UPI method).</p>
+        </div>
+        <div class="info-card">
+          <h4>📈 Real-Time Visual Intelligence</h4>
+          <p>Live IST (Indian Standard Time) greeting, dynamic spending donut chart, monthly cashflow trend lines, and category budget progress caps.</p>
+        </div>
+        <div class="info-card">
+          <h4>⌨️ Power-User Keyboard Navigation</h4>
+          <p><kbd>Ctrl+K</kbd> for command bar, <kbd>E</kbd> for expense modal, <kbd>I</kbd> for income modal, <kbd>/</kbd> for ledger search, and <kbd>Esc</kbd> to dismiss modals.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 4: SYSTEM ARCHITECTURE -->
+    <section class="slide">
+      <div class="slide-tag">Software Engineering</div>
+      <h2 class="slide-title">System Architecture & Monorepo Design</h2>
+      <div class="grid-2">
+        <div class="code-box">
+          <span class="code-comment"># Monorepo Clean Architecture</span><br>
+          expenso/<br>
+          ├── <span class="code-keyword">apps/api/</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment"># High-Speed FastAPI Backend</span><br>
+          │ &nbsp;&nbsp;├── core/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment"># DB, Security, Config</span><br>
+          │ &nbsp;&nbsp;└── domain/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment"># Domain Modules</span><br>
+          │ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── auth/ &nbsp;&nbsp;&nbsp;<span class="code-comment"># JWT, bcrypt, Profile</span><br>
+          │ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── transactions/<br>
+          │ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── analytics/<br>
+          │ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── budgets/<br>
+          │ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── recurring/<br>
+          ├── <span class="code-keyword">apps/web/</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment"># Modular Vanilla Client</span><br>
+          │ &nbsp;&nbsp;└── public/<br>
+          │ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── css/ &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment"># Tokens, Base, Components</span><br>
+          │ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── js/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment"># Services, Views, Modals</span><br>
+          └── <span class="code-keyword">AGENTS.md</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment"># &lt; 500 LOC per file Rule</span>
+        </div>
+        <div class="info-card">
+          <h4>🏛️ Clean Architectural Standards</h4>
+          <ul>
+            <li><strong>Strict Line Limit Rule:</strong> No file in the codebase exceeds 500 lines of code. Modular, readable, and highly maintainable.</li>
+            <li><strong>Separation of Concerns:</strong> Routers handle HTTP, Schemas validate data, Models interact with ORM, Views render UI.</li>
+            <li><strong>No Framework Bloat:</strong> Zero dependency client bundle loads in milliseconds and runs reliably on any browser without compile steps.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 5: DATABASE SCHEMA -->
+    <section class="slide">
+      <div class="slide-tag">Data Layer</div>
+      <h2 class="slide-title">Database Schema & Relational Design</h2>
+      <div class="grid-2">
+        <div class="info-card">
+          <h4>🗄️ Relational Entities (RDBMS)</h4>
+          <ul>
+            <li><strong>Users:</strong> <code>id, name, email, password_hash, currency, created_at</code></li>
+            <li><strong>Transactions:</strong> <code>id, user_id, amount, type, description, category_id, payment_method_id, date</code></li>
+            <li><strong>Categories:</strong> <code>id, user_id, name, type, icon, color, is_default</code></li>
+            <li><strong>Payment Methods:</strong> <code>id, user_id, name, type</code> (UPI, Cash, Cards)</li>
+            <li><strong>Budgets:</strong> <code>id, user_id, category_id, amount, month, year</code></li>
+            <li><strong>Recurring:</strong> <code>id, user_id, name, amount, frequency, next_date</code></li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4>🛡️ Data Integrity & Constraints</h4>
+          <ul>
+            <li><strong>Foreign Key Cascades:</strong> When a user or category is deleted, related records are cleaned automatically (<code>ondelete="CASCADE"</code>).</li>
+            <li><strong>Data Isolation:</strong> Every query strictly filters by <code>user_id == current_user_id</code>. No user can see another user's financial ledger.</li>
+            <li><strong>ORM Efficiency:</strong> Uses SQLAlchemy <code>joinedload</code> for eager loading categories and payment methods in a single SQL query.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 6: BACKEND & SECURITY -->
+    <section class="slide">
+      <div class="slide-tag">Backend Architecture</div>
+      <h2 class="slide-title">FastAPI Backend & Security Implementation</h2>
+      <div class="grid-2">
+        <div class="info-card">
+          <h4>🔒 Security Implementation</h4>
+          <ul>
+            <li><strong>Password Hashing:</strong> Passwords hashed with <strong>bcrypt</strong> (salt rounds) via Passlib. Plaintext is never stored.</li>
+            <li><strong>Stateless JWT Auth:</strong> HS256 algorithm generates signed access tokens with configurable expiry (7 days).</li>
+            <li><strong>Dependency Injection:</strong> <code>Depends(get_current_user_id)</code> guards all private endpoints.</li>
+            <li><strong>SQL Injection Safe:</strong> Parameterized queries via SQLAlchemy ORM prevent SQL injection attacks.</li>
+          </ul>
+        </div>
+        <div class="code-box">
+          <span class="code-comment"># Auth Guard Dependency Example</span><br>
+          <span class="code-keyword">def</span> <span class="code-fn">get_current_user_id</span>(<br>
+          &nbsp;&nbsp;token: <span class="code-str">str</span> = <span class="code-fn">Depends</span>(oauth2_scheme)<br>
+          ) -&gt; <span class="code-str">int</span>:<br>
+          &nbsp;&nbsp;<span class="code-keyword">try</span>:<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;payload = jwt.<span class="code-fn">decode</span>(token, SECRET, algorithms=[<span class="code-str">"HS256"</span>])<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> int(payload.get(<span class="code-str">"sub"</span>))<br>
+          &nbsp;&nbsp;<span class="code-keyword">except</span> JWTError:<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">raise</span> <span class="code-fn">HTTPException</span>(status_code=401)
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 7: FRONTEND ARCHITECTURE -->
+    <section class="slide">
+      <div class="slide-tag">Client-Side Engineering</div>
+      <h2 class="slide-title">Frontend Architecture & Design System</h2>
+      <div class="grid-3">
+        <div class="info-card">
+          <h4>🎨 Semantic CSS Layers</h4>
+          <p>CSS is structured into clean layers: <code>tokens.css</code> (colors, typography), <code>base.css</code> (layout), <code>components.css</code> (buttons, cards), <code>modals.css</code>.</p>
+        </div>
+        <div class="info-card">
+          <h4>🌓 Dynamic Theme Engine</h4>
+          <p>Instant Dark/Light mode switcher with CSS custom variables (<code>--bg-app</code>, <code>--bg-card</code>) persisted in <code>localStorage</code>.</p>
+        </div>
+        <div class="info-card">
+          <h4>📦 Layered JS Modules</h4>
+          <p>Decoupled architecture: <code>API</code> (Network), <code>State</code> (Store & Formatters), <code>Views</code> (Home, Ledger, Analytics), <code>Modals</code>, <code>ProfileMenu</code>.</p>
+        </div>
+      </div>
+      <div class="info-card" style="margin-top: 24px;">
+        <h4>✨ Modern UI Aesthetics</h4>
+        <p>Built with modern Glassmorphism (<code>backdrop-filter: blur(16px)</code>), subtle hover elevations, responsive mobile navigation bar, and accessible keyboard shortcuts.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 8: SMART TRANSACTION LOGGER -->
+    <section class="slide">
+      <div class="slide-tag">Feature Deep-Dive</div>
+      <h2 class="slide-title">Smart Transaction Engine & Auto-Detection</h2>
+      <div class="grid-2">
+        <div class="info-card">
+          <h4>🧠 Keyword Recognition Engine</h4>
+          <p style="margin-bottom: 12px;">As the user types into Description, a live listener parses keywords against category taxonomies:</p>
+          <ul>
+            <li><strong>"Pizza", "Burger", "Chai"</strong> ➔ Auto-selects <em>Food & Dining</em> 🍔</li>
+            <li><strong>"Uber", "Metro", "Petrol"</strong> ➔ Auto-selects <em>Transport</em> 🚕</li>
+            <li><strong>"Amazon", "Blinkit", "Jeans"</strong> ➔ Auto-selects <em>Shopping</em> 🛒</li>
+            <li><strong>"Electricity", "WiFi", "Recharge"</strong> ➔ Auto-selects <em>Bills & Utilities</em> 💡</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4>🛡️ Streamlined UX Rules</h4>
+          <ul>
+            <li><strong>Add Expense:</strong> Description is optional. If left blank, category name is automatically used as fallback.</li>
+            <li><strong>Add Income:</strong> Description input is hidden for a cleaner layout. Only Amount, Category, and Date are needed.</li>
+            <li><strong>Default Payment Mode:</strong> Automatically pre-selects <strong>UPI</strong> for modern fast payments.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 9: LIVE DEMO - 1-TAP QUICK RECORD -->
+    <section class="slide">
+      <div class="slide-tag">Live Application Walkthrough</div>
+      <h2 class="slide-title">Home Screen: 1-Tap Quick Record</h2>
+      <div class="grid-2" style="align-items: center; gap: 24px;">
+        <div style="background: rgba(20,30,51,0.85); border: 2px solid #10B981; border-radius: 14px; padding: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); text-align: center;">
+          <span style="background: rgba(16,185,129,0.2); color: #10B981; font-weight: 700; padding: 4px 12px; border-radius: 20px; font-size: 0.78rem; display: inline-block; margin-bottom: 8px;">📸 LIVE INTERFACE VIEW</span>
+          <img src="/static/screenshots/quick_record_ui.png" alt="Quick Record Screen" style="width: 100%; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); display: block;">
+        </div>
+        <div class="info-card" style="border-left: 4px solid #10B981;">
+          <h4 style="color: #10B981;">💡 What You See Here (Beginner Guide)</h4>
+          <p style="color: #94A3B8; margin-bottom: 12px; font-size: 0.95rem;">
+            Designed for zero-effort habit tracking. Anyone can record daily expenses in under 2 seconds without navigating complex menus.
+          </p>
+          <ul style="font-size: 0.88rem; line-height: 1.5;">
+            <li><strong>🟢 Big Green (+) Action:</strong> Centered for instant thumb reach; opens entry popup in 1 tap.</li>
+            <li><strong>💰 Live Balance Ticker:</strong> See available balance (₹4,383) and today's spend (₹3,851) at all times.</li>
+            <li><strong>⚡ Quick-Category Chips:</strong> Tap Food (₹930) or Shopping (₹1,214) to pre-fill common expenses.</li>
+            <li><strong>⌨️ Smart Natural Input (Ctrl+K):</strong> Type 'Add ₹250 for dinner' and category is auto-detected.</li>
+          </ul>
+          <div style="background: rgba(16,185,129,0.15); border: 1px solid #10B981; border-radius: 8px; padding: 8px 12px; margin-top: 14px;">
+            <span style="font-weight: 700; color: #34D399; font-size: 0.85rem;">✨ Beginner Benefit:</span>
+            <span style="color: #A7F3D0; font-size: 0.85rem;"> No accounting knowledge needed. It works just like sending a quick chat message.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 10: LIVE DEMO - FINANCIAL DASHBOARD -->
+    <section class="slide">
+      <div class="slide-tag">Live Application Walkthrough</div>
+      <h2 class="slide-title">Interactive Dashboard & Visual Analytics</h2>
+      <div class="grid-2" style="align-items: center; gap: 24px;">
+        <div style="background: rgba(20,30,51,0.85); border: 2px solid #3B82F6; border-radius: 14px; padding: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); text-align: center;">
+          <span style="background: rgba(59,130,246,0.2); color: #3B82F6; font-weight: 700; padding: 4px 12px; border-radius: 20px; font-size: 0.78rem; display: inline-block; margin-bottom: 8px;">📸 LIVE INTERFACE VIEW</span>
+          <img src="/static/screenshots/dashboard_ui.png" alt="Financial Dashboard Screen" style="width: 100%; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); display: block;">
+        </div>
+        <div class="info-card" style="border-left: 4px solid #3B82F6;">
+          <h4 style="color: #3B82F6;">💡 What You See Here (Beginner Guide)</h4>
+          <p style="color: #94A3B8; margin-bottom: 12px; font-size: 0.95rem;">
+            Translates complex numbers into simple, colorful charts so beginners instantly know where money went and how much they saved.
+          </p>
+          <ul style="font-size: 0.88rem; line-height: 1.5;">
+            <li><strong>📊 4 Core Summary Cards:</strong> Clear numbers for Total Balance, Monthly Income, Monthly Expenses, and Savings.</li>
+            <li><strong>📈 Savings Rate (53.2%):</strong> Tells you in green if you are saving enough money this month.</li>
+            <li><strong>📉 Spending Overview Bar Chart:</strong> Compares cash coming in vs going out across months.</li>
+            <li><strong>🍩 Category Donut Chart:</strong> Shows exact percentage spent on Food, Transport, Shopping, and Health.</li>
+          </ul>
+          <div style="background: rgba(59,130,246,0.15); border: 1px solid #3B82F6; border-radius: 8px; padding: 8px 12px; margin-top: 14px;">
+            <span style="font-weight: 700; color: #60A5FA; font-size: 0.85rem;">✨ Beginner Benefit:</span>
+            <span style="color: #BFDBFE; font-size: 0.85rem;"> You understand your complete monthly financial health in just 5 seconds.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 11: LIVE DEMO - FINANCIAL LEDGER -->
+    <section class="slide">
+      <div class="slide-tag">Live Application Walkthrough</div>
+      <h2 class="slide-title">Smart Ledger: Filterable Money Diary</h2>
+      <div class="grid-2" style="align-items: center; gap: 24px;">
+        <div style="background: rgba(20,30,51,0.85); border: 2px solid #8B5CF6; border-radius: 14px; padding: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); text-align: center;">
+          <span style="background: rgba(139,92,246,0.2); color: #8B5CF6; font-weight: 700; padding: 4px 12px; border-radius: 20px; font-size: 0.78rem; display: inline-block; margin-bottom: 8px;">📸 LIVE INTERFACE VIEW</span>
+          <img src="/static/screenshots/transactions_ui.png" alt="Transactions Ledger Screen" style="width: 100%; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); display: block;">
+        </div>
+        <div class="info-card" style="border-left: 4px solid #8B5CF6;">
+          <h4 style="color: #8B5CF6;">💡 What You See Here (Beginner Guide)</h4>
+          <p style="color: #94A3B8; margin-bottom: 12px; font-size: 0.95rem;">
+            An organized digital passbook where every rupee is tracked with clear color codes, instant search, and export capabilities.
+          </p>
+          <ul style="font-size: 0.88rem; line-height: 1.5;">
+            <li><strong>🏷️ Color-Coded Badges:</strong> Green (+₹7,000) for Income and Red (-₹890) for Expenses — impossible to confuse.</li>
+            <li><strong>🔍 Instant Keyword Search:</strong> Find past spends like 'gym', 'movie', or 'groceries' in milliseconds.</li>
+            <li><strong>⚡ Category & Mode Filters:</strong> Filter by Payment Method (UPI, Cash) or Category with 1 click.</li>
+            <li><strong>📥 One-Click CSV Export:</strong> Download full transaction history to Excel for personal records or taxes.</li>
+          </ul>
+          <div style="background: rgba(139,92,246,0.15); border: 1px solid #8B5CF6; border-radius: 8px; padding: 8px 12px; margin-top: 14px;">
+            <span style="font-weight: 700; color: #A78BFA; font-size: 0.85rem;">✨ Beginner Benefit:</span>
+            <span style="color: #DDD6FE; font-size: 0.85rem;"> Never wonder where your cash disappeared at the end of the month.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 12: LIVE DEMO - CATEGORY BUDGETS -->
+    <section class="slide">
+      <div class="slide-tag">Live Application Walkthrough</div>
+      <h2 class="slide-title">Budget Guardrails: Avoid Month-End Deficit</h2>
+      <div class="grid-2" style="align-items: center; gap: 24px;">
+        <div style="background: rgba(20,30,51,0.85); border: 2px solid #F59E0B; border-radius: 14px; padding: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); text-align: center;">
+          <span style="background: rgba(245,158,11,0.2); color: #F59E0B; font-weight: 700; padding: 4px 12px; border-radius: 20px; font-size: 0.78rem; display: inline-block; margin-bottom: 8px;">📸 LIVE INTERFACE VIEW</span>
+          <img src="/static/screenshots/budgets_ui.png" alt="Category Budgets Screen" style="width: 100%; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); display: block;">
+        </div>
+        <div class="info-card" style="border-left: 4px solid #F59E0B;">
+          <h4 style="color: #F59E0B;">💡 What You See Here (Beginner Guide)</h4>
+          <p style="color: #94A3B8; margin-bottom: 12px; font-size: 0.95rem;">
+            Set monthly spending limits for categories like Food and Shopping. Visual progress meters guide you before you overspend.
+          </p>
+          <ul style="font-size: 0.88rem; line-height: 1.5;">
+            <li><strong>📊 Visual Progress Meters:</strong> Colored bars show percentage consumed (e.g., Shopping: 60.7%, Food: 46.5%).</li>
+            <li><strong>💵 Live Remaining Balances:</strong> Exact cash left displayed upfront (e.g. '₹1,070 remaining' for food).</li>
+            <li><strong>🛡️ Safe vs Danger Status:</strong> Clear 'NORMAL' green badge alerts you before a category limit is exceeded.</li>
+            <li><strong>⚙️ Flexible Custom Limits:</strong> Tap '+ Set New Budget' anytime to adjust limits as your lifestyle changes.</li>
+          </ul>
+          <div style="background: rgba(245,158,11,0.15); border: 1px solid #F59E0B; border-radius: 8px; padding: 8px 12px; margin-top: 14px;">
+            <span style="font-weight: 700; color: #FBBF24; font-size: 0.85rem;">✨ Beginner Benefit:</span>
+            <span style="color: #FEF3C7; font-size: 0.85rem;"> Acts like a financial guardian, preventing impulse overspending before it happens.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 13: ANALYTICS & VISUAL INTELLIGENCE -->
+    <section class="slide">
+      <div class="slide-tag">Data Visualization</div>
+      <h2 class="slide-title">Analytics & Live Financial Intelligence</h2>
+      <div class="grid-2">
+        <div class="info-card">
+          <h4>📊 Real-Time Charts & Insights</h4>
+          <ul>
+            <li><strong>Monthly Cashflow Trend:</strong> Compares Income vs Expenses over the past 6 months using dynamic line graphs.</li>
+            <li><strong>Category Breakdown:</strong> Interactive doughnut chart illustrating where user money goes by percentage.</li>
+            <li><strong>Live IST Clock:</strong> Indian Standard Time sync with natural dynamic greetings (Morning, Afternoon, Evening, Night).</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4>💰 Smart Balance Calculations</h4>
+          <ul>
+            <li><strong>Total Balance:</strong> Accurately computes net financial position (Total Income - Total Expenses).</li>
+            <li><strong>Savings Rate:</strong> Computes savings percentage: <code>(Savings / Monthly Income) * 100</code>.</li>
+            <li><strong>Today's Burn:</strong> Displays today's live spend right on the Home landing pill.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 10: BUDGETS, RECURRING & CALENDAR -->
+    <section class="slide">
+      <div class="slide-tag">Advanced Modules</div>
+      <h2 class="slide-title">Budgets, Recurring Bills & Interactive Calendar</h2>
+      <div class="grid-3">
+        <div class="info-card">
+          <h4>🎯 Monthly Budgets</h4>
+          <p>Set spend limits per category. Visual progress bars shift from <span style="color:var(--accent);">Normal (Green)</span> to <span style="color:var(--warning);">Warning (Orange)</span> to <span style="color:var(--danger);">Exceeded (Red)</span>.</p>
+        </div>
+        <div class="info-card">
+          <h4>🔄 Recurring Subscriptions</h4>
+          <p>Tracks recurring bills (Netflix, Rent, Gym, Internet). Automated endpoint <code>/process-due</code> automatically posts due expenses on their billing date.</p>
+        </div>
+        <div class="info-card">
+          <h4>📅 Interactive Calendar</h4>
+          <p>Aggregates transactions day-by-day in an intuitive calendar grid. Click any day to inspect that date's financial ledger.</p>
+        </div>
+      </div>
+      <div class="info-card" style="margin-top: 24px; border-left: 4px solid var(--accent-purple);">
+        <h4>🏷️ Minimal Categories View</h4>
+        <p>Intelligently displays <strong>only active categories</strong> with recorded transactions, eliminating clutter while automatically accommodating newly used categories.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 11: TESTING & PERFORMANCE -->
+    <section class="slide">
+      <div class="slide-tag">Quality Assurance</div>
+      <h2 class="slide-title">Testing, Performance & Engineering Standards</h2>
+      <div class="grid-2">
+        <div class="info-card">
+          <h4>🚀 Performance Metrics</h4>
+          <ul>
+            <li><strong>Sub-50ms API Latency:</strong> FastAPI's asynchronous ASGI architecture ensures lightning-fast responses.</li>
+            <li><strong>Zero Compilation Delay:</strong> Native modern JavaScript runs directly in browser without heavy Webpack/Vite overhead.</li>
+            <li><strong>Optimized Queries:</strong> SQLAlchemy indices on <code>user_id</code> and <code>transaction_date</code> ensure instant pagination.</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4>✅ Code Quality & Maintainability</h4>
+          <ul>
+            <li><strong>Strict &lt; 500 LOC Enforcement:</strong> Every file was decomposed into modular domain units (no monolithic files).</li>
+            <li><strong>Input Validation:</strong> Pydantic models validate data types, email formats, and number bounds before hitting database.</li>
+            <li><strong>Error Handling:</strong> Standardized JSON error responses and user-friendly visual toasts.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 12: CONCLUSION & FUTURE SCOPE -->
+    <section class="slide">
+      <div class="slide-tag">Summary & Roadmap</div>
+      <h2 class="slide-title">Conclusion & Future Enhancements</h2>
+      <div class="grid-2">
+        <div class="info-card" style="border-left: 4px solid var(--accent);">
+          <h4 style="color: var(--accent);">🎓 Key Project Takeaways</h4>
+          <ul>
+            <li>Engineered a full-stack, enterprise-grade application with clean monorepo architecture.</li>
+            <li>Mastered asynchronous REST API development with FastAPI and relational database modeling.</li>
+            <li>Implemented real-world authentication, state persistence, and responsive UI design.</li>
+          </ul>
+        </div>
+        <div class="info-card" style="border-left: 4px solid var(--accent-blue);">
+          <h4 style="color: var(--accent-blue);">🔮 Future Scope</h4>
+          <ul>
+            <li><strong>AI Receipt OCR:</strong> Upload bill photo to automatically extract amount, merchant, and items.</li>
+            <li><strong>Bank SMS Parser:</strong> Automatic transaction capture via Android app helper.</li>
+            <li><strong>Multi-User Splitwise:</strong> Group expenses splitting with friends and roommates.</li>
+          </ul>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: 32px;">
+        <h2 style="font-size: 1.5rem; color: #FFF; margin-bottom: 6px;">Thank You! 🙏 Questions?</h2>
+        <p style="color: var(--text-muted);">Expenso is running live locally: <a href="http://localhost:8000" target="_blank" style="color: var(--accent); font-weight: 600;">http://localhost:8000</a></p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Bottom Navigation Hints -->
+  <footer class="deck-footer">
+    <div>Use <kbd>◀</kbd> / <kbd>▶</kbd> Arrow Keys to Navigate Slides</div>
+    <div>Expenso &bull; Clean Architecture Monorepo</div>
+    <div>Press <kbd>F11</kbd> for Fullscreen Presentation Mode</div>
+  </footer>
+
+  <script src="/static/js/presentation.js"></script>
+</body>
+</html>

@@ -2,6 +2,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   State.init();
   Modals.setupShortcuts();
+  ProfileMenu.init();
 
   document.querySelectorAll(".nav-item, .bottom-nav-item").forEach(item => {
     item.addEventListener("click", (e) => {
@@ -21,6 +22,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function navigateToView(viewId) {
   State.state.currentView = viewId;
+  document.body.dataset.view = viewId;
+
+  const isHome = viewId === "home";
+  const btnIncome = document.getElementById("btnAddIncome");
+  const btnExpense = document.getElementById("btnAddExpense");
+  if (btnIncome) btnIncome.style.display = isHome ? "none" : "";
+  if (btnExpense) btnExpense.style.display = isHome ? "none" : "";
+
   document.querySelectorAll(".nav-item, .bottom-nav-item").forEach(el => {
     el.classList.toggle("active", el.dataset.view === viewId);
   });
@@ -29,7 +38,7 @@ function navigateToView(viewId) {
   if (activeView) activeView.classList.add("active");
 
   if (viewId === "home") HomeView.load();
-  else if (viewId === "dashboard") DashboardView.load();
+  else if (viewId === "dashboard") { updateGreeting(); DashboardView.load(); }
   else if (viewId === "transactions") TransactionsView.load();
   else if (viewId === "analytics") AnalyticsView.load();
   else if (viewId === "budgets") BudgetsView.load();
@@ -51,17 +60,96 @@ async function loadApp() {
   }
 }
 
+function getISTInfo() {
+  const now = new Date();
+  try {
+    const formatter = new Intl.DateTimeFormat("en-GB", {
+      timeZone: "Asia/Kolkata",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hourCycle: "h23"
+    });
+    const parts = formatter.format(now).split(":");
+    const hour = parseInt(parts[0], 10);
+    const minute = parseInt(parts[1], 10);
+
+    const timeFormatted = new Intl.DateTimeFormat("en-IN", {
+      timeZone: "Asia/Kolkata",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true
+    }).format(now);
+
+    return { hour, minute, timeFormatted };
+  } catch {
+    const hour = now.getHours();
+    return {
+      hour,
+      minute: now.getMinutes(),
+      timeFormatted: now.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })
+    };
+  }
+}
+
+function updateGreeting(user) {
+  const currentUser = user || State.state.user;
+  if (!currentUser) return;
+  State.state.user = currentUser;
+
+  const ist = getISTInfo();
+  let greeting = "Good evening";
+  let emoji = "👋";
+
+  // Natural Indian time ranges (IST):
+  // 04:00 - 11:59: Good morning 🌅
+  // 12:00 - 16:59: Good afternoon ☀️
+  // 17:00 - 21:59: Good evening 🌆
+  // 22:00 - 03:59: Good night 🌙
+  if (ist.hour >= 4 && ist.hour < 12) {
+    greeting = "Good morning";
+    emoji = "🌅";
+  } else if (ist.hour >= 12 && ist.hour < 17) {
+    greeting = "Good afternoon";
+    emoji = "☀️";
+  } else if (ist.hour >= 17 && ist.hour < 22) {
+    greeting = "Good evening";
+    emoji = "🌆";
+  } else {
+    greeting = "Good night";
+    emoji = "🌙";
+  }
+
+  const firstName = currentUser.name ? currentUser.name.split(" ")[0] : "";
+  const greetingEl = document.getElementById("dashboardGreeting");
+  if (greetingEl) {
+    greetingEl.innerText = `${greeting}, ${firstName} ${emoji}`;
+  }
+
+  const istClockEl = document.getElementById("istLiveTime");
+  if (istClockEl) {
+    istClockEl.innerText = `${ist.timeFormatted} IST`;
+  }
+}
+window.updateGreeting = updateGreeting;
+
 function updateUserSnippet(user) {
   if (!user) return;
+  State.state.user = user;
   document.querySelectorAll(".user-name-display").forEach(el => el.innerText = user.name);
   document.querySelectorAll(".user-email-display").forEach(el => el.innerText = user.email);
   document.querySelectorAll(".user-avatar").forEach(el => el.innerText = user.name.charAt(0).toUpperCase());
 
-  const hour = new Date().getHours();
-  const greeting = hour < 12 ? "Good morning" : (hour < 17 ? "Good afternoon" : "Good evening");
-  const greetingEl = document.getElementById("dashboardGreeting");
-  if (greetingEl) greetingEl.innerText = `${greeting}, ${user.name.split(" ")[0]} 👋`;
+  updateGreeting(user);
 }
+
+// Live sync: keep IST greeting and time badge updated every 10s
+if (!window._istLiveInterval) {
+  window._istLiveInterval = setInterval(() => {
+    if (State.state.user) updateGreeting();
+  }, 10000);
+}
+
 
 async function loadCategoriesAndMethods() {
   try {
@@ -77,13 +165,19 @@ function populateDropdowns() {
   document.querySelectorAll(".category-select-dropdown").forEach(sel => {
     const prev = sel.value;
     sel.innerHTML = '<option value="">All Categories</option>';
-    State.state.categories.forEach(c => sel.innerHTML += `<option value="${c.id}">${c.name} (${c.type})</option>`);
+    State.state.categories.forEach(c => {
+      const icon = State.getCategoryIcon(c.name);
+      sel.innerHTML += `<option value="${c.id}">${icon}  ${c.name} (${c.type})</option>`;
+    });
     if (prev) sel.value = prev;
   });
   document.querySelectorAll(".pm-select-dropdown").forEach(sel => {
     const prev = sel.value;
     sel.innerHTML = '<option value="">All Payment Methods</option>';
-    State.state.paymentMethods.forEach(p => sel.innerHTML += `<option value="${p.id}">${p.name}</option>`);
+    State.state.paymentMethods.forEach(p => {
+      const icon = State.getPaymentMethodIcon(p.name);
+      sel.innerHTML += `<option value="${p.id}">${icon}  ${p.name}</option>`;
+    });
     if (prev) sel.value = prev;
   });
 }
@@ -112,12 +206,27 @@ function bindFormEvents() {
     e.preventDefault();
     const form = e.target;
     const txId = form.dataset.editId;
+    const type = document.getElementById("txType").value;
+    const catId = parseInt(document.getElementById("txCategory").value) || null;
+    let pmId = parseInt(document.getElementById("txPaymentMethod").value) || null;
+    if (!pmId && State.state.paymentMethods?.length) {
+      const upi = State.state.paymentMethods.find(p => p.name.toLowerCase().includes("upi"));
+      pmId = upi ? upi.id : State.state.paymentMethods[0].id;
+    }
+    let desc = "";
+    if (type === "expense") {
+      desc = document.getElementById("txDescription")?.value?.trim() || "";
+    }
+    if (!desc) {
+      const cat = catId ? State.state.categories.find(c => c.id === catId) : null;
+      desc = cat ? cat.name : (type === "income" ? "Income" : "Expense");
+    }
     const payload = {
       amount: parseFloat(document.getElementById("txAmount").value),
-      type: document.getElementById("txType").value,
-      description: document.getElementById("txDescription").value.trim(),
-      category_id: parseInt(document.getElementById("txCategory").value) || null,
-      payment_method_id: parseInt(document.getElementById("txPaymentMethod").value) || null,
+      type,
+      description: desc,
+      category_id: catId,
+      payment_method_id: pmId,
       transaction_date: document.getElementById("txDate").value,
       notes: document.getElementById("txNotes").value.trim() || null
     };
@@ -157,7 +266,7 @@ function bindFormEvents() {
       .then(res => res.blob()).then(blob => {
         const a = document.createElement("a");
         a.href = window.URL.createObjectURL(blob);
-        a.download = `expenso_transactions_${new Date().toISOString().slice(0, 10)}.csv`;
+        a.download = `expenso_transactions_${State.getTodayDateString()}.csv`;
         a.click(); a.remove();
         Toast.show("Transactions CSV downloaded!");
       }).catch(() => Toast.show("Export failed", "error"));
